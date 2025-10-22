@@ -1,9 +1,10 @@
-import User from '../models/user.models.js';
+import {User} from '../models/user.models.js';
 
 
 export const Signup = async(req,res)=>{
     const {userName,email,password} =req.body;
     console.log(req.files);
+    console.log(req.body);
     return;
     try{
 
