@@ -1,13 +1,19 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { loginvalidation } from "../utils/validation/formvalidation";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 const Login = () => {
+  const{handleSubmit,register,formState:{errors}}=useForm({
+    resolver:yupResolver(loginvalidation),mode:"onBlur"
+  });
   const [formData, setFormData] = useState({ email: "", password: "" });
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
     console.log("Login Data:", formData);
    
@@ -30,7 +36,7 @@ const Login = () => {
           Welcome back
         </h3>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-slate-600 mb-2">
               Email address

@@ -13,6 +13,9 @@ const routes  = createBrowserRouter([
     {
     path:"/signup",
     element:<Suspense fallback={<div><Loader></Loader></div>}><Signup/></Suspense>
-    }
+    },
+    {path:"/login",
+    element:<Suspense fallback={<div><Loader></Loader></div>}><Login/></Suspense>
+}
 ])
 export default routes;

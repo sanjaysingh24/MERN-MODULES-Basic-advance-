@@ -1,13 +1,13 @@
 import React, { useState ,useEffect} from "react";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
-import {loginvalidation} from "../utils/validation/loginvalidation";
+import { registervalidation } from "../utils/validation/formvalidation";
 import { userSignup } from "../services/userService";
 const Signup = () => {
 
 const {handleSubmit,setValue,register,watch,formState:{errors}}=useForm({
-  resolver:yupResolver(loginvalidation),mode:"onBlur"
+  resolver:yupResolver(registervalidation),mode:"onBlur"
 });
   const [preview, setPreview] = useState(null);
   const watchImage =watch("profileImage");
@@ -55,108 +55,128 @@ try{
 }
 }
   return (
-    <div className="d-flex justify-content-center align-items-center vh-100 bg-light">
-      <div
-        className="card shadow p-4"
-        style={{ width: "420px", borderRadius: "12px" }}
-      >
-        <h3 className="text-center mb-4">Create Account</h3>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          {/* Profile Image */}
-          <div className="text-center mb-3">
-            <label htmlFor="profileImage" className="d-block">
-              <img
-                src={
-                  preview ||
-                  "https://cdn-icons-png.flaticon.com/512/149/149071.png"
-                }
-                alt="Profile Preview"
-                className="rounded-circle"
-                style={{
-                  width: "100px",
-                  height: "100px",
-                  objectFit: "cover",
-                  cursor: "pointer",
-                }}
-              />
-            </label>
-            <input
-              type="file"
-              id="profileImage"
-              accept="image/*"
-              style={{ display: "none" }}
-              // onChange={handleImageChange}
-              {...register("profileImage")}
-               onChange={onImageChange}
-            />
-          </div>
-        {errors.profileImage && <p className="text-danger custom-text">{errors.profileImage.message}</p>}
-          {/* Name */}
-          <div className="mb-3">
-            <label className="form-label">Full Name</label>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Enter your name"
-              name="name"
-              {...register("name")}
-            />
-            {errors.name && <p className="text-danger custom-text">{errors.name.message}</p>}
-          </div>
+  <div className="min-h-screen flex justify-center items-center bg-slate-100 p-3">
+  <div className="w-full max-w-md bg-white/90 backdrop-blur-md border border-gray-200 shadow-xl rounded-xl p-6">
+    <h3 className="text-xl font-semibold text-center text-slate-800 mb-4">
+      Create Account
+    </h3>
 
-          {/* Email */}
-          <div className="mb-3">
-            <label className="form-label">Email Address</label>
-            <input
-              type="email"
-              className="form-control"
-              placeholder="Enter your email"
-              name="email"
-              {...register("email")}
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      {/* Profile Image */}
+      <div className="flex flex-col items-center">
+        <label htmlFor="profileImage" className="cursor-pointer">
+          <img
+            src={
+              preview ||
+              "https://cdn-icons-png.flaticon.com/512/149/149071.png"
+            }
+            alt="Profile Preview"
+            className="w-24 h-24 rounded-full shadow-md object-cover hover:scale-105 transition"
+          />
+        </label>
 
-            />
-            {errors.email && <p className="text-danger custom-text">{errors.email.message}</p>}
-          </div>
+        <input
+          type="file"
+          id="profileImage"
+          accept="image/*"
+          className="hidden"
+          {...register("profileImage")}
+          onChange={onImageChange}
+        />
 
-          {/* Password */}
-          <div className="mb-3">
-            <label className="form-label">Password</label>
-            <input
-              type="password"
-              className="form-control"
-              placeholder="Enter password"
-              name="password"
-             {...register("password")}
-            />
-            {errors.password && <p className="text-danger custom-text">{errors.password.message}</p>}
-          </div>
-
-          {/* Confirm Password */}
-          <div className="mb-3">
-            <label className="form-label">Confirm Password</label>
-            <input
-              type="password"
-              className="form-control"
-              placeholder="Re-enter password"
-              name="confirmPassword"
-              {...register("confirmPassword")}
-            />
-            {errors.confirmPassword && <p className="text-danger custom-text">{errors.confirmPassword.message}</p>}
-          </div>
-
-          <button type="submit" className="btn btn-success w-100">
-            Sign Up
-          </button>
-
-          <p className="text-center mt-3 mb-0">
-            Already have an account?{" "}
-            <a href="/login" className="text-decoration-none">
-              Login
-            </a>
+        {errors.profileImage && (
+          <p className="text-red-600 text-xs mt-1">
+            {errors.profileImage.message}
           </p>
-        </form>
+        )}
       </div>
-    </div>
+
+      {/* Name */}
+      <div>
+        <label className="block text-sm font-medium text-slate-700 mb-1">
+          Full Name
+        </label>
+        <input
+          type="text"
+          {...register("name")}
+          placeholder="Enter your name"
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-400 focus:outline-none"
+        />
+        {errors.name && (
+          <p className="text-red-600 text-xs mt-1">{errors.name.message}</p>
+        )}
+      </div>
+
+      {/* Email */}
+      <div>
+        <label className="block text-sm font-medium text-slate-700 mb-1">
+          Email Address
+        </label>
+        <input
+          type="email"
+          {...register("email")}
+          placeholder="Enter your email"
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-400 focus:outline-none"
+        />
+        {errors.email && (
+          <p className="text-red-600 text-xs mt-1">{errors.email.message}</p>
+        )}
+      </div>
+
+      {/* Password */}
+      <div>
+        <label className="block text-sm font-medium text-slate-700 mb-1">
+          Password
+        </label>
+        <input
+          type="password"
+          {...register("password")}
+          placeholder="Enter password"
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-400 focus:outline-none"
+        />
+        {errors.password && (
+          <p className="text-red-600 text-xs mt-1">{errors.password.message}</p>
+        )}
+      </div>
+
+      {/* Confirm Password */}
+      <div>
+        <label className="block text-sm font-medium text-slate-700 mb-1">
+          Confirm Password
+        </label>
+        <input
+          type="password"
+          {...register("confirmPassword")}
+          placeholder="Re-enter password"
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-400 focus:outline-none"
+        />
+        {errors.confirmPassword && (
+          <p className="text-red-600 text-xs mt-1">
+            {errors.confirmPassword.message}
+          </p>
+        )}
+      </div>
+
+      {/* Submit */}
+      <button
+        type="submit"
+        className="w-full mt-2 inline-flex items-center justify-center gap-2 py-3 rounded-xl text-white font-semibold
+              bg-gradient-to-r from-indigo-500 to-violet-500 shadow-md hover:scale-[1.02] transform transition"
+      >
+        Sign Up
+      </button>
+
+      <p className="text-center text-sm text-slate-600">
+        Already have an account?{" "}
+        <Link to="/login" className="text-indigo-600 font-medium hover:underline">
+          Login
+        </Link>
+      </p>
+    </form>
+  </div>
+</div>
+
+
   );
 };
 
