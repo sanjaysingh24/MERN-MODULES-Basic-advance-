@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+//login validation for form validation to prevent unnesscerry data submission
 import { loginvalidation } from "../utils/validation/formvalidation";
 import { useForm } from "react-hook-form";
+//yup resolver for react hook form for validation
 import { yupResolver } from "@hookform/resolvers/yup";
 const Login = () => {
   const{handleSubmit,register,formState:{errors}}=useForm({

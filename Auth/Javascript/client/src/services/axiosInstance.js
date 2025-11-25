@@ -1,5 +1,6 @@
 import axios from 'axios';
-
+// simple axios instance with base url
+// we make it seprate so that we can use it in all over the project and the code is also look like organized
 const axiosInstance = axios.create({
     baseURL:'http://localhost:3000/api', // Replace with your API base URL
 })

@@ -1,5 +1,5 @@
 import React from 'react'
-
+// loader for suspense  till the website load it show in website
 const Loader = () => {
   return (
     <div>

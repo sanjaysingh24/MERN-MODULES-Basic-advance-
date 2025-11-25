@@ -1,10 +1,11 @@
 import {createBrowserRouter} from "react-router-dom"
 import { Suspense,lazy } from "react"
 import Loader from "../components/Loader";
-
+//dynamically import components for code splitting
 const Login  = lazy(()=>import ("../Pages/Login"));
 const Signup = lazy(()=>import ("../Pages/Signup"));
 
+// define routes using createBrowserRouter
 const routes  = createBrowserRouter([
     {
         path:"/",
