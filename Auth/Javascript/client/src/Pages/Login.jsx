@@ -46,13 +46,15 @@ const Login = () => {
             <input
               type="email"
               name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
+             
+            
               placeholder="you@domain.com"
               className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white text-slate-800 placeholder-slate-400
                 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition"
-            />
+            {...register("email")}
+            
+          />
+          {errors?.email && <p className="text-red-500 text-sm mt-1">{errors?.email?.message}</p>}
           </div>
 
           <div>
@@ -62,13 +64,15 @@ const Login = () => {
             <input
               type="password"
               name="password"
-              value={formData.password}
-              onChange={handleChange}
-              required
+              
+              
               placeholder="Enter your password"
               className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white text-slate-800 placeholder-slate-400
                 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition"
+              {...register("password")}
+              
             />
+            {errors?.password && <p className="text-red-500 text-sm mt-1">{errors?.password?.message}</p>}
           </div>
 
           <button

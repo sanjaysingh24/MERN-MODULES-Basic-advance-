@@ -4,6 +4,7 @@ import Loader from "../components/Loader";
 //dynamically import components for code splitting
 const Login  = lazy(()=>import ("../Pages/Login"));
 const Signup = lazy(()=>import ("../Pages/Signup"));
+const Dashboard = lazy(()=>import ("../Pages/Dashboard"))
 
 // define routes using createBrowserRouter
 const routes  = createBrowserRouter([
@@ -17,6 +18,10 @@ const routes  = createBrowserRouter([
     },
     {path:"/login",
     element:<Suspense fallback={<div><Loader></Loader></div>}><Login/></Suspense>
+},
+{
+    path:"/dashboard",
+    element:<Suspense fallback={<div><Loader></Loader></div>}><Dashboard/></Suspense>
 }
 ])
 export default routes;
