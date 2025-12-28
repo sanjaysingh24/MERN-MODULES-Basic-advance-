@@ -3,8 +3,10 @@ import { Link} from "react-router-dom";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import { registervalidation } from "../utils/validation/formvalidation";
-import { userSignup } from "../services/userService";
+import { useSignUpMutation } from "../store/slice/api";
 const Signup = () => {
+  // signUp
+  const[adduser,{isloading,error}] = useSignUpMutation();
 
 const {handleSubmit,setValue,register,watch,formState:{errors}}=useForm({
   resolver:yupResolver(registervalidation),mode:"onBlur"
@@ -48,7 +50,17 @@ const {handleSubmit,setValue,register,watch,formState:{errors}}=useForm({
   };
 const onSubmit=async(data)=>{
 try{
-    let response = await userSignup(data);
+
+ const formData = new FormData();
+    
+    formData.append("name", data.name);
+    formData.append("email", data.email);
+    formData.append("password", data.password);
+    formData.append("confirmPassword", data.confirmPassword);
+    formData.append("file", data.profileImage); // 👈 KEY same होना चाहिए multer.single('file') में
+
+  const submit = await adduser(formData);
+
     
 }catch(err){
   console.log(err);

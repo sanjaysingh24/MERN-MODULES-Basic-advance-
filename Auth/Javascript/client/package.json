@@ -11,13 +11,15 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
+    "@reduxjs/toolkit": "^2.11.2",
     "@tailwindcss/vite": "^4.1.17",
     "axios": "^1.12.2",
-    "bootstrap": "^5.3.8",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-hook-form": "^7.65.0",
+    "react-redux": "^9.2.0",
     "react-router-dom": "^7.9.3",
+    "redux": "^5.0.1",
     "yup": "^1.7.1"
   },
   "devDependencies": {

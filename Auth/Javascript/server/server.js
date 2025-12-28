@@ -1,8 +1,9 @@
-import app from "./app.js";
-import 'dotenv/config';
-import { connectDB } from "./config/db.js";
+import app from './src/app.js'
+import dotenv from 'dotenv'
+dotenv.config();
+import {connectDB} from './src/config/db.js'
 const port = process.env.PORT;
-await connectDB(`${process.env.MONGO_URL}`);
+await connectDB();
 const startServer = async()=>{
     try{
        app.listen(port,(err)=>{

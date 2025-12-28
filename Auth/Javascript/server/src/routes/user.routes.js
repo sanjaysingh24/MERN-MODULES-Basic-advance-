@@ -1,7 +1,8 @@
 import { Router } from "express";
-import { Signup } from "../controllers/user.controllers.js";
-
+import { login, Signup } from "../controllers/user.controllers.js";
+import { upload } from "../middlewares/multer.js";
 export const userRouter = Router();
 
 
-userRouter.post('/register',Signup)
+userRouter.post('/register',upload.single('file'),Signup)
+.post('/login',login)

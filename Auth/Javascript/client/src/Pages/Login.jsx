@@ -3,21 +3,24 @@ import { Link } from "react-router-dom";
 //login validation for form validation to prevent unnesscerry data submission
 import { loginvalidation } from "../utils/validation/formvalidation";
 import { useForm } from "react-hook-form";
+import { useLoginUserMutation } from "../store/slice/api";
 //yup resolver for react hook form for validation
 import { yupResolver } from "@hookform/resolvers/yup";
 const Login = () => {
   const{handleSubmit,register,formState:{errors}}=useForm({
     resolver:yupResolver(loginvalidation),mode:"onBlur"
   });
-  const [formData, setFormData] = useState({ email: "", password: "" });
+const[loginuser,{isloading,error}]=useLoginUserMutation();
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const onSubmit = async(data) => {
+   try{
+ console.log("Login Data:", data);
+ let response = await loginuser(data);
+ console.log(response);
+   }catch(err){
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    console.log("Login Data:", formData);
+   }
+   
    
   };
 
