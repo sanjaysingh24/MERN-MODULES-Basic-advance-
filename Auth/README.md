@@ -110,9 +110,10 @@ Auth/
    MONGO_URI=your_mongodb_connection_string
    SECRET_KEY=your_jwt_secret_key
    REFRESH_SECRET_KEY=your_refresh_token_secret_key
-   CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
-   CLOUDINARY_API_KEY=your_cloudinary_api_key
-   CLOUDINARY_API_SECRET=your_cloudinary_api_secret
+   CLOUD_NAME=your_cloudinary_cloud_name
+   CLOUD_API_KEY=your_cloudinary_api_key
+   CLOUD_SECRET=your_cloudinary_api_secret
+   REFRESH_SECRET_KEY=refresh_jwt_secret_key
    ```
 
 4. Start the server:
