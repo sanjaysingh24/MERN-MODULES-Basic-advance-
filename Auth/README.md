@@ -45,9 +45,13 @@ Auth/
 ├── client/                 # React frontend
 │   ├── src/
 │   │   ├── components/     # Reusable UI components
+│   │   │   ├── Loader.jsx  # Loading UI component
 │   │   ├── Pages/          # Page components (Login, Signup, Dashboard)
 │   │   ├── routes/         # Routing configuration
 │   │   ├── store/          # Redux store and slices
+│   │   │   ├── slice/      # Redux slices
+│   │   │   │   ├── api.js  # API slice for RTK Query
+│   │   │   │   ├── authslice.js # Authentication state slice
 │   │   ├── utils/          # Utility functions and validations
 │   │   └── App.jsx         # Main app component
 │   ├── package.json        # Frontend dependencies
@@ -71,6 +75,8 @@ Auth/
 - **Login Component**: Handles user login with form validation using Yup and React Hook Form
 - **Signup Component**: Manages user registration with profile image upload
 - **API Slice**: Redux Toolkit RTK Query for API calls (login, signup mutations)
+- **Auth Slice**: Redux slice for managing authentication state (login success, logout actions)
+- **Loader Component**: UI component for displaying loading states during operations
 - **Form Validation**: Custom validation schemas for email, password, and name fields
 - **Routing**: Protected and public routes using React Router
 
