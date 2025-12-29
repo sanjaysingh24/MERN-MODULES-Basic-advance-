@@ -6,19 +6,29 @@ import { useForm } from "react-hook-form";
 import { useLoginUserMutation } from "../store/slice/api";
 //yup resolver for react hook form for validation
 import { yupResolver } from "@hookform/resolvers/yup";
+//import action from authslicer
+import { loginsuccess } from "../store/slice/authslice";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 const Login = () => {
+  const dispatch = useDispatch();
   const{handleSubmit,register,formState:{errors}}=useForm({
     resolver:yupResolver(loginvalidation),mode:"onBlur"
   });
 const[loginuser,{isloading,error}]=useLoginUserMutation();
 
-  const onSubmit = async(data) => {
+  const onSubmit = async(formdata) => {
    try{
- console.log("Login Data:", data);
- let response = await loginuser(data);
- console.log(response);
-   }catch(err){
 
+ let response = await loginuser(formdata);
+const{data} = response;
+if(data?.status){
+  toast.success("yup yup yup")  
+  dispatch(loginsuccess(data?.token))
+
+}
+   }catch(err){
+console.log(err);
    }
    
    
@@ -49,7 +59,7 @@ const[loginuser,{isloading,error}]=useLoginUserMutation();
             <input
               type="email"
               name="email"
-             
+             autoComplete="email"
             
               placeholder="you@domain.com"
               className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white text-slate-800 placeholder-slate-400
@@ -68,7 +78,7 @@ const[loginuser,{isloading,error}]=useLoginUserMutation();
               type="password"
               name="password"
               
-              
+              autoComplete="current-password"
               placeholder="Enter your password"
               className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white text-slate-800 placeholder-slate-400
                 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition"

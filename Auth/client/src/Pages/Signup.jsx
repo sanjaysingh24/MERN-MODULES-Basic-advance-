@@ -111,6 +111,7 @@ try{
         <input
           type="text"
           {...register("name")}
+          autoComplete="name"
           placeholder="Enter your name"
           className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-400 focus:outline-none"
         />
@@ -128,6 +129,7 @@ try{
           Email Address
         </label>
         <input
+        autoComplete="email"
           type="email"
           {...register("email")}
           placeholder="Enter your email"
@@ -147,6 +149,7 @@ try{
           type="password"
           {...register("password")}
           placeholder="Enter password"
+          autoComplete="new-password"
           className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-400 focus:outline-none"
         />
         {errors.password && (
@@ -163,6 +166,7 @@ try{
           type="password"
           {...register("confirmPassword")}
           placeholder="Re-enter password"
+          autoComplete="new-password"
           className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-400 focus:outline-none"
         />
         {errors.confirmPassword && (

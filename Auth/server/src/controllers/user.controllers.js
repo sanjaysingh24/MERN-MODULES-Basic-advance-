@@ -72,3 +72,23 @@ export const login = async(req,res)=>{
         return res.status(500).json({message:"Internal Server Error",status:false})
     }
 }
+// for refreshtoken one
+export const refreshtoken = async(req,res)=>{
+    const refreshtoken = req.cookies.refreshtoken;
+    if(!refreshtoken){
+        return res.status(400).json({message:"Token not found",status:false})
+    }
+    try{
+         const decode = jwt.verify(refreshtoken,process.env.REFRESH_SECRET_KEY);
+        if(decode){
+  const accesstoken = jwt.sign({suid:decode.suid},process.env.SECRET_KEY,{expiresIn:'5m'});
+         return res.status(201).json({message:"New Accesstoken",token:accesstoken,status:true})
+        }
+        return res.status(403).json({message:"Unauthorized Access",status:false})
+       
+
+    }catch(err){
+        console.log(err);
+        return res.status(403).json({message:err,status:false});
+    }
+}
