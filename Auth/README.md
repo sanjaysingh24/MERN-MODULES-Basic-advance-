@@ -46,6 +46,8 @@ Auth/
 │   ├── src/
 │   │   ├── components/     # Reusable UI components
 │   │   │   ├── Loader.jsx  # Loading UI component
+│   │   ├── HOC/            # Higher-Order Components
+│   │   │   ├── Auth.jsx    # Authentication HOC for route protection
 │   │   ├── Pages/          # Page components (Login, Signup, Dashboard)
 │   │   ├── routes/         # Routing configuration
 │   │   ├── store/          # Redux store and slices
@@ -76,6 +78,7 @@ Auth/
 - **Signup Component**: Manages user registration with profile image upload
 - **API Slice**: Redux Toolkit RTK Query for API calls (login, signup mutations)
 - **Auth Slice**: Redux slice for managing authentication state (login success, logout actions)
+- **Auth HOC**: Higher-Order Component for protecting routes based on authentication status
 - **Loader Component**: UI component for displaying loading states during operations
 - **Form Validation**: Custom validation schemas for email, password, and name fields
 - **Routing**: Protected and public routes using React Router

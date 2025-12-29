@@ -1,12 +1,28 @@
 import React from "react";
-
+import { withoutauth } from "../HOC/withoutauth";
+import { withauth } from "../HOC/withauth";
+import { useDispatch } from "react-redux";
+import { logoutuser } from "../store/slice/authslice";
+import { useLogoutUserMutation } from "../store/slice/api";
 const Dashboard = () => {
+  const dispatch = useDispatch();
+  const[logout] = useLogoutUserMutation();
+const handlelogout = async()=>{
+  try{
+    const res = await logout().unwrap();
+    console.log(res);
+    dispatch(logoutuser())
+     
+  }catch(err){
+    console.log(err);
+  }
+}
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200">
       {/* Navbar */}
       <nav className="bg-white shadow-md p-4 flex justify-between items-center sticky top-0 z-10">
         <h1 className="text-3xl font-bold tracking-tight">My Dashboard</h1>
-        <button className="bg-blue-600 hover:bg-blue-700 transition px-5 py-2 text-white font-medium rounded-lg">
+        <button onClick={handlelogout} className="bg-blue-600 hover:bg-blue-700 transition px-5 py-2 text-white font-medium rounded-lg cursor-pointer">
           Logout
         </button>
       </nav>
@@ -59,4 +75,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default withoutauth(Dashboard);

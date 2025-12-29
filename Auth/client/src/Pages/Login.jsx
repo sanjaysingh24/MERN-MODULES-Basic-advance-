@@ -10,8 +10,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { loginsuccess } from "../store/slice/authslice";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import { withauth } from "../HOC/withauth";
+import { useNavigate } from "react-router-dom";
 const Login = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const{handleSubmit,register,formState:{errors}}=useForm({
     resolver:yupResolver(loginvalidation),mode:"onBlur"
   });
@@ -24,7 +27,8 @@ const[loginuser,{isloading,error}]=useLoginUserMutation();
 const{data} = response;
 if(data?.status){
   toast.success("yup yup yup")  
-  dispatch(loginsuccess(data?.token))
+  dispatch(loginsuccess(data?.token));
+  navigate('/dashboard');
 
 }
    }catch(err){
@@ -90,7 +94,7 @@ console.log(err);
 
           <button
             type="submit"
-            className="w-full mt-2 inline-flex items-center justify-center gap-2 py-3 rounded-xl text-white font-semibold
+            className="cursor-pointer w-full mt-2 inline-flex items-center justify-center gap-2 py-3 rounded-xl text-white font-semibold
               bg-gradient-to-r from-indigo-500 to-violet-500 shadow-md hover:scale-[1.02] transform transition"
           >
             {/* simple lock svg */}
@@ -132,4 +136,4 @@ console.log(err);
   );
 };
 
-export default Login;
+export default withauth(Login);

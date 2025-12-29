@@ -8,7 +8,7 @@ export const  authslicer = createSlice({
     },
     reducers:{
         loginsuccess:(state,action)=>{
-            console.log(action);
+            
             state.accessToken=action.payload,
             state.isLogin=true
 
