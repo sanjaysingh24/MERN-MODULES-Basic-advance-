@@ -9,6 +9,7 @@ export class userRepositry{
         return saveuser
 
     }
+    
     async getuserbyEmail(email){
         return await User.findOne({email:email})
     }

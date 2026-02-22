@@ -16,5 +16,6 @@ const controller = new UserController(service);
 
 router.post("/register",controller.register);
 router.get("/getall",controller.getallUsers);
+router.post("/login",controller.loginUser)
 
 export default router;
